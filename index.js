@@ -10,7 +10,9 @@ wss.on('connection', function connection(ws) {
   ws.send('something');
 
   setInterval(() => {
-    ws.send(`something at : ${Date.now()}`);
+    if (ws.readyState === WebSocket.OPEN) {
+      ws.send(`something at : ${Date.now()}`);
+    }
   }, 3000);
 
 });
